@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular App</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+</head>
+<body>
+	<!-- angular app-->
+	<div ng-app="myApp">
+		<p>This is a testing angular app!</p>
+
+		<!-- Controller div-->
+		<div ng-controller="sampleCtrl">
+		 <input type="text" ng-model="txt">
+		 Type the text to see the result
+		 <h3>You have entered {{display()}} </h3><BR><hr>
+		</div>
+
+		<!-- http-response data div -->
+		<div ng-controller="httpCtrl" align="center">
+				<h3>{{welcomeMsg}}</h3><br>
+		</div>
+
+		<!-- links to pages -->
+		<div align="center">
+		 <a href="#template1">template1</a>
+		 <a href="#template2">template2</a>
+		 <a href="#template3">template3</a>
+		 <hr>
+		</div>
+		
+		<!-- View for Routing -->
+		<div ng-view></div>
+
+		<!-- factory and interpolation -->
+		<div ng-controller="siteCtrl" align="center">
+		<hr>
+		<input type="text" ng-model="siteName"><br>
+		<h3><a ng-href="https://www.{{siteName}}.com">{{siteName}}</a></h3>
+		</div>
+	</div>
+	<script>
+	var app = angular.module("myApp", ["ngRoute"]);
+	// Text display controller
+	app.controller("sampleCtrl",function($scope){
+	$scope.txt="nothing";
+	$scope.display=function(){
+		return $scope.txt;
+	}
+	});
+	// http request response controller
+	app.controller("httpCtrl",function($scope,$http){
+		$http.get("httpRes.html")
+		.then(function(response){
+			$scope.welcomeMsg=response.data;
+		})
+	});
+	//controller for URL redirect
+	app.controller("siteCtrl",function($scope){
+	});
+
+	// Demonstration of Routing concept
+	app.config(function($routeProvider) {
+	    $routeProvider
+	    .when("/template1", {
+	        templateUrl : "template1.html"
+	    })
+	    .when("/template2", {
+	        templateUrl : "template2.html"
+	    })
+	    .when("/template3", {
+	        templateUrl : "template3.html"
+	    })
+	  
+	});
+	</script>
+</body>
+</html>
