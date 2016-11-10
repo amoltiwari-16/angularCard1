@@ -2,8 +2,6 @@
 <html>
 <head>
 	<title>Angular App</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 </head>
 <body>
 	<!-- angular app-->
@@ -33,47 +31,16 @@
 		<!-- View for Routing -->
 		<div ng-view></div>
 
-		<!-- factory and interpolation -->
-		<div ng-controller="siteCtrl" align="center">
+		<!-- interpolation -->
+		<div align="center">
 		<hr>
 		<input type="text" ng-model="siteName"><br>
 		<h3><a ng-href="https://www.{{siteName}}.com">{{siteName}}</a></h3>
 		</div>
 	</div>
-	<script>
-	var app = angular.module("myApp", ["ngRoute"]);
-	// Text display controller
-	app.controller("sampleCtrl",function($scope){
-	$scope.txt="nothing";
-	$scope.display=function(){
-		return $scope.txt;
-	}
-	});
-	// http request response controller
-	app.controller("httpCtrl",function($scope,$http){
-		$http.get("httpRes.html")
-		.then(function(response){
-			$scope.welcomeMsg=response.data;
-		})
-	});
-	//controller for URL redirect
-	app.controller("siteCtrl",function($scope){
-	});
-
-	// Demonstration of Routing concept
-	app.config(function($routeProvider) {
-	    $routeProvider
-	    .when("/template1", {
-	        templateUrl : "template1.html"
-	    })
-	    .when("/template2", {
-	        templateUrl : "template2.html"
-	    })
-	    .when("/template3", {
-	        templateUrl : "template3.html"
-	    })
-	  
-	});
-	</script>
+	<script src="./bower_components/angular/angular.js"></script>
+	<script src="./bower_components/angular-route/angular-route.js"></script>
+	<script src="./js/app.js"></script>
+	<script src="./js/controller.js"></script>
 </body>
 </html>
